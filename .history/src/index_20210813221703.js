@@ -11,7 +11,7 @@ const reducer = (state = [], action) => {
     case ADD_TODO:
       return [...state, { text: action.text, id: action.id }];
     case DELETE_TODO:
-      return state.filter((toDo) => toDo.id !== action.id);
+      return [];
     default:
       return [];
   }
@@ -20,22 +20,13 @@ const reducer = (state = [], action) => {
 const store = createStore(reducer);
 store.subscribe(() => console.log(store.getState()));
 
-const deleteTodo = (e) => {
-  const id = parseInt(e.target.parentNode.id);
-  store.dispatch({ type: DELETE_TODO, id });
-};
-
 const paintToDo = () => {
   const toDos = store.getState();
   ul.innerHTML = "";
   toDos.forEach((toDo) => {
     const li = document.createElement("li");
-    const button = document.createElement("button");
-    button.innerText = "delete";
-    button.addEventListener("click", deleteTodo);
     li.id = toDo.id;
     li.innerText = toDo.text;
-    li.appendChild(button);
     ul.appendChild(li);
   });
 };

@@ -21,7 +21,7 @@ const store = createStore(reducer);
 store.subscribe(() => console.log(store.getState()));
 
 const deleteTodo = (e) => {
-  const id = parseInt(e.target.parentNode.id);
+  const id = e.target.parentNode.id;
   store.dispatch({ type: DELETE_TODO, id });
 };
 
